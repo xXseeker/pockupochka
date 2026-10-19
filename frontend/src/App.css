@@ -8,6 +8,11 @@ header{
   gap: 24px;
 }
 
+.left-side-header{
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 .left-side-header h1{
   color: #2563eb;
   margin: 0 0 8px 0;
@@ -18,7 +23,51 @@ header{
   margin: 0;
 }
 
+.right-side-header{
+  flex: 0 0 auto;
+}
+
 .right-side-header p{
   font-size: 16px;
   margin: 0;
+}
+
+.products-grid{
+  max-width: 90%;
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  list-style: none;
+}
+
+.card-item{
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  transition: border-color 0.4s ease;
+}
+
+.card-item:hover{
+  border-color: #2563eb;
+}
+
+.product-img-in-the-future{
+  height: 200px;
+  margin: 0 auto;
+  max-width: 200px;
+  background-color: #64748b;
+  border-radius: 12px;
+}
+
+.card-item h3{
+  color: #1e293b;
+  margin-bottom: 5px;
+}
+
+.card-item p{
+  margin-top: 0px;
 }

@@ -3,10 +3,10 @@ import { type Product } from "../types/product"
 import ProductCard from "./ProductCard";
 
 type CatalogProps = {
-  onAddToCart: (product: Product) => void;
+   onAddToCart: (product: Product) => void;
 };
 
-export default function Catalog({onAddToCart}: CatalogProps) {
+export default function Catalog({ onAddToCart }: CatalogProps) {
    const [products, setProducts] = useState<Product[]>([]);
    const [loading, setLoading] = useState(true);
    const [error, setError] = useState<string | null>(null);
@@ -30,7 +30,7 @@ export default function Catalog({onAddToCart}: CatalogProps) {
          try {
             setError(null);
             setLoading(true);
-            const response = await fetch(url, {signal: controller.signal});
+            const response = await fetch(url, { signal: controller.signal });
 
             if (!response.ok) {
                throw new Error("Ошибка загрузки данных!");
@@ -39,7 +39,7 @@ export default function Catalog({onAddToCart}: CatalogProps) {
             const data = await response.json();
             setProducts(data);
          } catch (error) {
-            if(controller.signal.aborted){
+            if (controller.signal.aborted) {
                return
             }
 
@@ -48,7 +48,7 @@ export default function Catalog({onAddToCart}: CatalogProps) {
                setError(error.message);
             }
          } finally {
-            if(!controller.signal.aborted){
+            if (!controller.signal.aborted) {
                setLoading(false);
             }
          }
@@ -65,18 +65,18 @@ export default function Catalog({onAddToCart}: CatalogProps) {
       <>
          <h2>Каталог товаров</h2>
          <label htmlFor="searchProduct">Поиск товара: </label>
-         <input id="searchProduct" type="text" value = {search} onChange={(event) => setSearch(event.target.value)}/>
-         {loading 
+         <input id="searchProduct" type="text" value={search} onChange={(event) => setSearch(event.target.value)} />
+         {loading
             ? <p>Загрузка товаров!</p>
-            : error 
-               ?  <p>Возникла ошибка при загрузке товаров.</p>
-               :  products.length === 0
-                     ? <p>Товары не найдены</p>
-                     : <ul>
-                        {products.map(product => (
-                           <ProductCard key={product.id} onAddToCart = {onAddToCart} product={product}/>
-                        ))}
-                     </ul>
+            : error
+               ? <p>Возникла ошибка при загрузке товаров.</p>
+               : products.length === 0
+                  ? <p>Товары не найдены</p>
+                  : <ul className="products-grid">
+                     {products.map(product => (
+                        <ProductCard key={product.id} onAddToCart={onAddToCart} product={product} />
+                     ))}
+                  </ul>
          }
       </>
    );
