@@ -16,10 +16,10 @@ function App() {
   
 
   return (
-    <>
+    <div className='pageContainer'>
       <Header cartCount={cart.length} cartSum = {cartSum}/>
       <Catalog onAddToCart = {handleAddToCart}/>
-    </>
+    </div>
   )
 }
 

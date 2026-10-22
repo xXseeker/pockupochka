@@ -63,9 +63,11 @@ export default function Catalog({ onAddToCart }: CatalogProps) {
 
    return (
       <>
-         <h2>Каталог товаров</h2>
-         <label htmlFor="searchProduct">Поиск товара: </label>
-         <input id="searchProduct" type="text" value={search} onChange={(event) => setSearch(event.target.value)} />
+         <div className="formSearch">
+            <h2>Каталог товаров</h2>
+            <label htmlFor="searchProduct">Поиск товара: </label>
+            <input id="searchProduct" type="text" value={search} onChange={(event) => setSearch(event.target.value)} />
+         </div>
          {loading
             ? <p>Загрузка товаров!</p>
             : error
