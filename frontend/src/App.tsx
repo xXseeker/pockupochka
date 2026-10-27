@@ -33,6 +33,31 @@ function App() {
     setCart(prev => prev.filter(p => p.product.id !== productId));
   }
 
+  function handleIncreaseQuantity(productId: number){
+    setCart( prev => {
+      return prev.map(
+        item => {
+          if (item.product.id === productId) {
+            return {...item, quantity: item.quantity + 1}
+          }
+          return item
+        }
+      )
+    });
+  }
+
+  function handleDecreaseFromCart(productId: number){
+    setCart( prev => {
+      return prev.map( item => {
+        if(item.product.id === productId && item.quantity > 1){
+          return {...item, quantity: item.quantity - 1}
+        }
+
+        return item
+      })
+    });
+  }
+
   const cartSum = cart.reduce((acc, p) => acc + p.product.price * p.quantity, 0);
 
   const countProducts = cart.reduce((acc, p) => acc + p.quantity, 0)
@@ -41,7 +66,7 @@ function App() {
     <div className='pageContainer'>
       <Header cartCount={countProducts} cartSum={cartSum} />
       <Catalog onAddToCart={handleAddToCart} />
-      <Cart onRemove={handleRemoveFromCart} items={cart} />
+      <Cart onRemove={handleRemoveFromCart} onIncrease={handleIncreaseQuantity} onDecrease={handleDecreaseFromCart} items={cart} />
     </div>
   )
 }
